@@ -1,0 +1,131 @@
+###
+
+# Test example public API
+GET https://servicodados.ibge.gov.br/api/v1/localidades/municipios
+
+###
+
+# Check existing services
+GET http://localhost:8001/services/
+
+###
+
+# Check existing routes
+GET http://localhost:8001/routes/
+
+###
+
+# Create service IBGE-API-Municipios
+POST http://localhost:8001/services/
+Content-Type: application/json
+
+{
+    "name" : "IBGE-API-Municipios",
+    "url"  : "https://servicodados.ibge.gov.br/api/v1/localidades/municipios"
+}
+
+###
+
+# Create service IBGE-KML-Municipios
+POST http://localhost:8001/services/
+Content-Type: application/json
+
+{
+    "name" : "IBGE-KML-Municipios",
+    "url"  : "https://geoftp.ibge.gov.br/organizacao_do_territorio/estrutura_territorial/localidades/Google_KML/BR_Localidades_2010_v1.kml"
+}
+
+###
+
+# Create service Elasticsearch
+POST http://localhost:8001/services/
+Content-Type: application/json
+
+{
+    "name" : "Elasticsearch",
+    "url"  : "http://elasticsearch:9200"
+}
+
+###
+
+# Create route IBGE-API-Municipios
+POST http://localhost:8001/services/IBGE-API-Municipios/routes
+Content-Type: application/json
+
+{
+    "name"  : "IBGE-API-Municipios",
+    "paths" : [
+        "/ibge-api-municipios"
+    ]
+}
+
+###
+
+# Create route IBGE-KML-Municipios
+POST http://localhost:8001/services/IBGE-KML-Municipios/routes
+Content-Type: application/json
+
+{
+    "name"  : "IBGE-KML-Municipios",
+    "paths" : [
+        "/ibge-kml-municipios"
+    ]
+}
+
+###
+
+# Create route Elasticsearch
+POST http://localhost:8001/services/Elasticsearch/routes
+Content-Type: application/json
+
+{
+    "name"  : "Elasticsearch",
+    "paths" : [
+        "/elasticsearch"
+    ]
+}
+
+###
+
+# Test created route IBGE-API-Municipios
+GET http://localhost:8000/ibge-api-municipios
+
+###
+
+# Test created route IBGE-KML-Municipios
+GET http://localhost:8000/ibge-kml-municipios
+
+###
+
+# Test created route Elasticsearch
+GET http://localhost:8000/elasticsearch
+
+###
+
+# Delete created route
+DELETE http://localhost:8001/routes/IBGE-API-Municipios
+
+###
+
+# Delete created route
+DELETE http://localhost:8001/routes/IBGE-KML-Municipios
+
+###
+
+# Delete created route
+DELETE http://localhost:8001/routes/Elasticsearch
+
+###
+
+# Delete created service
+DELETE http://localhost:8001/services/IBGE-API-Municipios
+
+###
+
+# Delete created service
+DELETE http://localhost:8001/services/IBGE-KML-Municipios
+
+###
+
+# Delete created service
+DELETE http://localhost:8001/services/Elasticsearch
